@@ -2,6 +2,7 @@ import { GameInfo } from './game-info';
 import { GameCell } from './game-cell';
 import { useGameState } from './use-game-state';
 import styles from './game.module.css';
+import { ResetBtn } from './reset-btn';
 
 export function Game() {
   const {
@@ -31,9 +32,7 @@ export function Game() {
           />
         ))}
       </div>
-      <button className={styles['reset']} onClick={handleResetClick}>
-        Сбросить
-      </button>
+      <ResetBtn onClick={handleResetClick} />
     </div>
   );
 }
