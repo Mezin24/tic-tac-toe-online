@@ -8,7 +8,7 @@ export function GameSymbol({ symbol }) {
     return '';
   };
   return (
-    <span className={clsx('text-xl', getSymbolClassName(symbol))}>
+    <span className={clsx('text-lg', getSymbolClassName(symbol))}>
       {symbol}
     </span>
   );

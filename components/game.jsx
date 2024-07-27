@@ -1,8 +1,9 @@
 import { GameInfo } from './game-info';
 import { GameCell } from './game-cell';
 import { useGameState } from './use-game-state';
-import styles from './game.module.css';
 import { ResetBtn } from './reset-btn';
+import { GameField } from './game-field';
+import { GameLayout } from './game-layout';
 
 export function Game() {
   const {
@@ -16,13 +17,13 @@ export function Game() {
   } = useGameState();
 
   return (
-    <div className={styles.game}>
+    <GameLayout>
       <GameInfo
         isDraw={isDraw}
         winnerSymbol={winnerSymbol}
         currentStep={currentStep}
       />
-      <div className={styles['game-field']}>
+      <GameField>
         {cells.map((symbol, index) => (
           <GameCell
             key={index}
@@ -31,8 +32,8 @@ export function Game() {
             onClick={() => handleCellClick(index)}
           />
         ))}
-      </div>
+      </GameField>
       <ResetBtn onClick={handleResetClick} />
-    </div>
+    </GameLayout>
   );
 }
