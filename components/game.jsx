@@ -1,9 +1,9 @@
-import { GameInfo } from './game-info';
-import { GameCell } from './game-cell';
-import { useGameState } from './use-game-state';
-import { ResetBtn } from './reset-btn';
-import { GameField } from './game-field';
-import { GameLayout } from './game-layout';
+import { GameCell } from "./game-cell";
+import { GameField } from "./game-field";
+import { GameInfo } from "./game-info";
+import { GameLayout } from "./game-layout";
+import { ResetBtn } from "./reset-btn";
+import { useGameState } from "./use-game-state";
 
 export function Game() {
   const {
