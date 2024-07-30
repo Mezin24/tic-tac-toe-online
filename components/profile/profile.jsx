@@ -1,8 +1,8 @@
 import Image from "next/image";
-import avatar from "./ava.jpg";
+import ava from "./ava.jpg";
 import clsx from "clsx";
 
-export const Profile = ({ className }) => {
+export const Profile = ({ className, name, rating, avatar = ava }) => {
   return (
     <div
       className={clsx(
@@ -17,10 +17,12 @@ export const Profile = ({ className }) => {
         height={48}
         className="rounded-full"
       />
-      <div>
-        <div className="  text-lg leading-tight">Mezin24</div>
+      <div className="overflow-hidden">
+        <div className="  text-lg leading-tight text-ellipsis overflow-hidden">
+          {name}
+        </div>
         <div className="text-slate-400 text-xs leading-tight">
-          Рейтинг: 1234
+          Рейтинг: {rating}
         </div>
       </div>
     </div>

@@ -12,8 +12,8 @@ export const Header = () => {
       <UIButton className="w-44" variant="primary" size="lg">
         Играть
       </UIButton>
-      <button className="ml-auto text-teal-600  flex items-center gap-2 ">
-        <Profile />
+      <button className="ml-auto text-teal-600  flex items-center gap-2 text-start">
+        <Profile name="Pavel" rating="120" />
         <ArrowDownIcon />
       </button>
     </header>
