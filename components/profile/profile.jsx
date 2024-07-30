@@ -11,6 +11,7 @@ export const Profile = ({ className, name, rating, avatar = ava }) => {
       )}
     >
       <Image
+        priority={true}
         src={avatar}
         alt="avatar"
         width={48}

@@ -4,7 +4,7 @@ import { GameTitle, GameInfo, GameField, UseGameState } from "components/game";
 
 export default function HomePage() {
   const [playersCount, setPlayersCount] = useState(2);
-  const { cells, currentMove, handleCellClick, nextMove } =
+  const { cells, currentMove, handleCellClick, nextMove, winnerSequence } =
     UseGameState(playersCount);
 
   return (
@@ -23,6 +23,7 @@ export default function HomePage() {
           currentMove={currentMove}
           handleCellClick={handleCellClick}
           nextMove={nextMove}
+          winnerSequence={winnerSequence}
         />
       </main>
     </div>
