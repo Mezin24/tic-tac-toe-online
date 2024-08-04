@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useCallback, useMemo, useReducer } from "react";
 import { players } from "./constants";
 import { computeWinnerSymbol } from "./model/compute-winner-symbol";
 import { gameStateReducer, initGameState } from "./model/game-state-reducer";
@@ -23,26 +23,38 @@ export const Game = () => {
     gameStateReducer,
     {
       playersCount: PLAYER_COUNT,
-      defaultTimer: 6000,
+      defaultTimer: 60000,
       currentMoveStart: Date.now(),
     },
     initGameState
   );
-  const winnerSequence = computeWinner(gameState);
+  const winnerSequence = useMemo(() => computeWinner(gameState), [gameState]);
   const nextMove = getNextMove(gameState);
 
   const winnerSymbol = computeWinnerSymbol(gameState, {
     winnerSequence,
     nextMove,
   });
-  useTimer(1000, gameState.currentMoveStart, () => {
-    dispatch({
-      type: GAME_ACTION_TYPES.TICK,
-      now: Date.now(),
-    });
-  });
+  useTimer(
+    1000,
+    gameState.currentMoveStart,
+    useCallback(() => {
+      dispatch({
+        type: GAME_ACTION_TYPES.TICK,
+        now: Date.now(),
+      });
+    }, [])
+  );
 
   const winnerPlayer = players.find((player) => player.symbol === winnerSymbol);
+
+  const handleCellClick = useCallback((index) => {
+    dispatch({
+      type: GAME_ACTION_TYPES.CELL_CLICK,
+      index,
+      now: Date.now(),
+    });
+  }, []);
 
   return (
     <>
@@ -79,13 +91,8 @@ export const Game = () => {
         }
         gameCells={gameState.cells.map((cell, index) => (
           <GameCell
-            onClick={() =>
-              dispatch({
-                type: GAME_ACTION_TYPES.CELL_CLICK,
-                index,
-                now: Date.now(),
-              })
-            }
+            onClick={handleCellClick}
+            index={index}
             key={index}
             isWinner={winnerSequence?.includes(index)}
             disabled={!!winnerSymbol}
